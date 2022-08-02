@@ -1,49 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
 import styles from '../../styles/form/loginForm.module.css'
 import Image from 'next/image'
-
-
-
-const RegisterSchema = Yup.object().shape({
-  /*  name: Yup.string()
-     .min(2, 'Too Short!')
-     .max(50, 'Too Long!')
-     .required('This field is required.'), */
-  email: Yup.string()
-    .email('Invalid email')
-    .required('This field is required.'),
-  password: Yup.string()
-    .min(3, 'Please Enter less then 3 letters')
-    .required('This field is required.'),
-  /*   confirmPassword: Yup.string()
-      .min(3, 'Please Enter less then 3 letters')
-      .required('This field is required.')
-      //check is password match ?
-      .test('passwords-match', 'Password not match.', function (value) {
-        return this.parent.password === value;
-      }), */
-});
-
+import apiService from '../../services/apiService'
+import AlertBar from '../alertbar/login/alerbar'
+import { RegisterSchema } from '../../services/validate/loginForm'
+import Link from 'next/link'
 
 export default function loginForm() {
+  const [messageBar, setMessageBar] = useState(null)
+  const [isLoading , setIsLoading] = useState(false)
+
+  const login = async (value) => {
+    setIsLoading(true)
+    const loginBody = {
+      email: value.email,
+      password: value.password
+    }
+    const res = await apiService('POST', 'login', null, null, loginBody)
+    if (!res || !res.resultCode || res.resultCode == '50000') {
+      setMessageBar({ data: 'Error,Please try again.', type: 'error' })
+    }
+    if (res.resultCode == '40401') {
+      setMessageBar({ data: 'User not found.', type: 'error' })
+    }
+    if (res.resultCode == '40101') {
+      setMessageBar({ data: 'Wrong Password.', type: 'error' })
+    }
+    if (res.resultCode == '40102') {
+      setMessageBar({ data: 'Email is not verified.', type: 'warning' })
+    }
+    if (res.resultCode == '20000') {
+      
+    }
+    setIsLoading(false)
+  }
+
   return (
     <div className='px-8 py-8 h-full'>
       <div className='w-full'>
         <div className='w-full flex justify-center'>
           <p className={styles.header}>Sign In</p>
         </div>
-        <div className="">
+        <div className='mt-3'>
+          {messageBar != null && <AlertBar data={messageBar.data} type={messageBar.type}></AlertBar>}
+        </div>
+
+        <div>
           <Formik
             initialValues={{
-              email: '',
-              password: '',
+              email: 'testadmin@gmail.com',
+              password: '12345689',
             }}
             validationSchema={RegisterSchema}
-            onSubmit={values => {
+            onSubmit={async (values) => {
               // same shape as initial values
-              console.log(values);
+              await login(values);
             }}
           >
             {({ errors, touched }) => (
@@ -57,7 +69,7 @@ export default function loginForm() {
                     id="email"
                     placeholder="Enter Your Email"
                   />
-                  <ErrorMessage component="div" name="email" className={styles.invalidText} />
+                  <ErrorMessage component="div" name="email" className={styles.invalidText + ' mt-1'} />
                 </div>
                 <div className="form-group mt-2">
                   <label htmlFor="password" >Password</label>
@@ -67,9 +79,8 @@ export default function loginForm() {
                     id="password"
                     placeholder="Enter Your Password"
                   />
-                  <ErrorMessage component="div" name="password" className={styles.invalidText} />
+                  <ErrorMessage component="div" name="password" className={styles.invalidText + ' mt-1'} />
                 </div>
-
                 <div>
                   <div className={styles.googleSignIn + ' mt-4'}>
                     <Image className="" src="/images/header/google_icon.svg" layout="fixed" width="28" height="28" />
@@ -78,27 +89,30 @@ export default function loginForm() {
                     </div>
                   </div>
                 </div>
-
                 <div>
                   <div className={styles.facebookSignIn + ' mt-4'}>
-                    <Image  className=" " src="/images/header/facebook_icon.svg" layout="fixed" width="30" height="30" />
+                    <Image className=" " src="/images/header/facebook_icon.svg" layout="fixed" width="30" height="30" />
                     <div className="m-auto">
                       <span>Sign in with Facebook</span>
                     </div>
                   </div>
                 </div>
-
                 <div className='mt-4 flex justify-center'>
+                <Link href="/user/forgot-password">
                   <a className={styles.forgotPassText}>
-                    Forgot Password?
+                    Forgot Password ?
                   </a>
+                  </Link>
                 </div>
                 <div className='mt-4 flex justify-center'>
-                  <button type="submit" className={styles.signInButton}>Sign In</button>
+                  <button type="submit" className={styles.signInButton + ' w-full' + `${isLoading ? ' cursor-not-allowed' : ' '}`}>Sign In</button>
                 </div>
                 <div className='mt-4 flex justify-center'>
                   <p className='mb-0'>
-                    Don't have a password ? <span className={styles.registerText}>Register</span>
+                    Don't have a password ?
+                    <Link href="/user/register">
+                      <span className={styles.registerText + ' ml-2'}>Register</span>
+                    </Link>
                   </p>
                 </div>
               </Form>

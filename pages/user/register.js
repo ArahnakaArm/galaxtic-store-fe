@@ -1,5 +1,8 @@
 import React from 'react'
-import LoginForm from '../../components/form/loginForm'
+import { useFormik, Formik, Form, Field, ErrorMessage } from 'formik';
+import { setCredential, getCredential } from '../../services/credentialService'
+import apiService from '../../services/apiService'
+import RegisterForm from '../../components/form/registerForm'
 
 export default function login() {
     const setToken = async (token) => {
@@ -17,7 +20,7 @@ export default function login() {
                 </div>
 
                 <div className='lg:col-span-4 md:col-span-4 sm:col-span-12 col-span-12'>
-                    <LoginForm ></LoginForm>
+                    <RegisterForm ></RegisterForm>
                 </div>
 
             </div>

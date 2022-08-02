@@ -1,0 +1,18 @@
+.commonHeader {
+        @apply text-2xl font-bold mb-0
+}
+.commonInputLabel{
+    @apply font-semibold mb-0 text-base 
+}
+.commonInput{
+    @apply block w-full px-3 py-2 bg-white border  rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500;
+}
+.changePassButton {
+    @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none
+}
+.invalidText {
+    @apply text-red-500 text-xs italic
+}
+.descriptionText{
+    @apply  mb-0 text-sm 
+}
