@@ -1,0 +1,16 @@
+.categoryItem {
+    @apply border-l-2 border-t-2 hover:shadow-lg cursor-pointer
+}
+
+.categoryItemSecondRow {
+    @apply border-l-2 border-t-2 border-b-2 hover:shadow-lg cursor-pointer 
+}
+
+.categoryItemFirstLast {
+    @apply border-r-2 border-t-2 border-l-2 hover:shadow-lg cursor-pointer
+}
+
+.categoryItemSecondLast {
+    @apply border-r-2 border-t-2 border-l-2 border-b-2 hover:shadow-lg cursor-pointer
+}
+

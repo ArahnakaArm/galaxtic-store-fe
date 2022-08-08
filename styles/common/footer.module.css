@@ -1,0 +1,10 @@
+.footerHeader { 
+    @apply text-base mb-0 font-semibold
+}
+.footerText { 
+    @apply text-xs mb-0 cursor-pointer hover:text-blue-700 inline font-semibold
+}
+
+.footerTextMedium { 
+    @apply text-sm mb-0 
+}

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
     "@redux-devtools/core": "^3.13.1",
     "@reduxjs/toolkit": "^1.8.3",
     "axios": "^0.27.2",
@@ -18,7 +19,9 @@
     "next-redux-wrapper": "^7.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-multi-carousel": "^2.8.2",
     "react-redux": "^8.0.2",
+    "react-responsive-carousel": "^3.2.23",
     "redux": "^4.2.0",
     "redux-batched-subscribe": "^0.1.6",
     "redux-thunk": "^2.4.1",

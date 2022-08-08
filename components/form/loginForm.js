@@ -72,7 +72,7 @@ export default function loginForm() {
                   <ErrorMessage component="div" name="email" className={styles.invalidText + ' mt-1'} />
                 </div>
                 <div className="form-group mt-2">
-                  <label htmlFor="password" >Password</label>
+                  <label htmlFor="password" className={styles.inputLabel}>Password</label>
                   <Field name="password"
                     type="password"
                     className={styles.commonInput + `${touched.password ? errors.password ? " border-red-500 mt-2" : " border-slate-300 mt-2" : ' mt-2'}`}

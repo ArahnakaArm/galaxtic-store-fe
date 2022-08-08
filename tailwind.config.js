@@ -5,7 +5,17 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontSize: {
+        xxs: ['10px', '14px'],
+        tiny: ['13px', '15.6px'],
+      },
+      colors: {
+        'backgroud-footer': '#fbfbfb',
+      },
+
+  
+    },
     screens: {
       'sm': '640px',
       // => @media (min-width: 640px) { ... }

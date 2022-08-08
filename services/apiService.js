@@ -44,5 +44,17 @@ const apiService = async (method, path, token = null, extendHeader = null, body 
 
     }
 
+    if(method == 'TEST GET') {
+        try {
+            console.log('e')
+            const res = await axios.get(`${path}`)
+            return res.data
+        } catch (e) {
+            console.log(e)
+            if (e.response.data) return e.response.data
+            return null
+        }
+    }
+
 }
 export default apiService;
