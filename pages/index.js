@@ -10,6 +10,7 @@ import Image from 'next/image'
 import "react-multi-carousel/lib/styles.css";
 import CarouselMul from "react-multi-carousel";
 
+
 export default function Home() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
@@ -155,23 +156,23 @@ export default function Home() {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-      slidesToSlide: 5
+      items: 6,
+      slidesToSlide: 6
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 5,
-      slidesToSlide: 5
+      items: 6,
+      slidesToSlide: 6
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 5,
-      slidesToSlide: 5
+      items: 4,
+      slidesToSlide: 4
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 5,
-      slidesToSlide: 5
+      items: 3,
+      slidesToSlide: 3
     }
 
   };
@@ -191,8 +192,22 @@ export default function Home() {
       carouselState: { currentSlide, deviceType }
     } = rest;
     // onMove means if dragging or swiping in progress.
-    return <button className="absolute before:content-['\e824']"   onClick={() => onClick()}></button>;
+    return <div className="absolute right-0" onClick={() => onClick()}>
+      <Image src="/icons/index/next.png" layout="fixed" width="28" height="28" />
+    </div>;
   };
+
+  const CustomLeftArrow = ({ onClick, ...rest }) => {
+    const {
+      onMove,
+      carouselState: { currentSlide, deviceType }
+    } = rest;
+    // onMove means if dragging or swiping in progress.
+    return <div className="absolute" onClick={() => onClick()}>
+      <Image src="/icons/index/back.png" layout="fixed" width="28" height="28" />
+    </div>;
+  };
+
 
 
   return (
@@ -337,7 +352,6 @@ export default function Home() {
               <p className='text-center'>Campaigns</p>
             </div>
           </div>
-
         </div>
 
         <div id='category'>
@@ -368,46 +382,47 @@ export default function Home() {
             <p className='mb-0 font-semibold'>TOP PRODUCTS</p>
           </div>
           <div className=''>
-            <div className='mx-auto max-h-[200px] lg:max-w-[1050px] md:max-w-[750px] sm:max-w-[600px] max-w-[360px]'>
+            <div className='mx-auto xl:max-w-[1200px] lg:max-w-[1020px] md:max-w-[768px] sm:max-w-[600px] ssm:max-w-[400px] sssm:max-w-[400px]  max-w-[360px]'>
               <CarouselMul
-                removeArrowOnDeviceType={["tablet", "mobile"]}
+                draggable={false}
+            /*     removeArrowOnDeviceType={["tablet", "mobile"]} */
                 responsive={responsive}
                 ssr
-                customLeftArrow={<CustomRightArrow />}
+                customLeftArrow={<CustomLeftArrow />}
                 customRightArrow={<CustomRightArrow />}
               >
-                <div >Item 1
+                <div>Item 1
                   <img className='max-h-[200px] flex' src='https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/432655/item/goods_01_432655.jpg?width=1008&impolicy=quality_75' />
                 </div>
                 <div>Item 2
                   <img className='max-h-[200px] flex' src='https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/432655/item/goods_01_432655.jpg?width=1008&impolicy=quality_75' />
                 </div>
 
-                <div>Item 4
+                <div>Item 3
                   <img className='max-h-[200px] flex' src='https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/432655/item/goods_01_432655.jpg?width=1008&impolicy=quality_75' />
                 </div>
                 <div>Item 4
                   <img className='max-h-[200px] flex' src='https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/432655/item/goods_01_432655.jpg?width=1008&impolicy=quality_75' />
                 </div>
-                <div>Item 4
+                <div>Item 5
                   <img className='max-h-[200px] flex' src='https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/432655/item/goods_01_432655.jpg?width=1008&impolicy=quality_75' />
                 </div>
-                <div>Item 4
+                <div>Item 6
                   <img className='max-h-[200px] flex' src='https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/432655/item/goods_01_432655.jpg?width=1008&impolicy=quality_75' />
                 </div>
-                <div>Item 4
+                <div>Item 7
                   <img className='max-h-[200px] flex' src='https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/432655/item/goods_01_432655.jpg?width=1008&impolicy=quality_75' />
                 </div>
-                <div>Item 4
+                <div>Item 8
                   <img className='max-h-[200px] flex' src='https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/432655/item/goods_01_432655.jpg?width=1008&impolicy=quality_75' />
                 </div>
-                <div>Item 4
+                <div>Item 9
                   <img className='max-h-[200px] flex' src='https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/432655/item/goods_01_432655.jpg?width=1008&impolicy=quality_75' />
                 </div>
-                <div>Item 4
+                <div>Item 10
                   <img className='max-h-[200px] flex' src='https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/432655/item/goods_01_432655.jpg?width=1008&impolicy=quality_75' />
                 </div>
-                <div className='flex justify-center'>Item 4
+                <div>Item 11
                   <img className='max-h-[200px] flex' src='https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/432655/item/goods_01_432655.jpg?width=1008&impolicy=quality_75' />
                 </div>
               </CarouselMul>
