@@ -4,6 +4,7 @@ import styles from '../../styles/form/loginForm.module.css'
 import apiService from '../../services/apiService'
 import AlertBar from '../alertbar/login/alerbar'
 import { RegisterSchema } from '../../services/validate/registerForm'
+import Link from 'next/link'
 
 export default function registerForm() {
   const [messageBar, setMessageBar] = useState(null)
@@ -32,7 +33,7 @@ export default function registerForm() {
   }
 
   return (
-    <div className='px-8 py-8 h-full'>
+    <div className='px-8 py-4 h-full'>
       <div className='w-full'>
         <div className='w-full flex justify-center'>
           <p className={styles.header}>Register</p>
@@ -42,12 +43,19 @@ export default function registerForm() {
         </div>}
         <div>
           <Formik
+            /*    initialValues={{
+                 firstname: 'TestFirst2',
+                 lastname: 'TestLast2',
+                 email: 'teetawatriya@gmail.com',
+                 password: '12345689',
+                 confirmPassword: '12345689',
+               }} */
             initialValues={{
-              firstname: 'TestFirst2',
-              lastname: 'TestLast2',
-              email: 'teetawatriya@gmail.com',
-              password: '12345689',
-              confirmPassword: '12345689',
+              firstname: '',
+              lastname: '',
+              email: '',
+              password: '',
+              confirmPassword: '',
             }}
             validationSchema={RegisterSchema}
             onSubmit={async (values) => {
@@ -57,7 +65,7 @@ export default function registerForm() {
           >
             {({ errors, touched }) => (
               <Form>
-                <div className="form-group mt-1">
+                <div className="form-group">
                   <label htmlFor="firstname" className={styles.inputLabel}>Firstname</label>
                   <Field
                     name="firstname"
@@ -110,13 +118,23 @@ export default function registerForm() {
                   />
                   <ErrorMessage component="div" name="confirmPassword" className={styles.invalidText + ' mt-1'} />
                 </div>
-                <div className='mt-3 flex justify-center'>
+                <div className='mt-2 flex justify-center'>
+                  <p className='mb-0'>
+                    Already have account ?
+                    <Link href="/user/login">
+                      <span className={styles.registerText + ' ml-2'}>Log In</span>
+                    </Link>
+                  </p>
+                </div>
+
+                <div className='mt-2 flex justify-center'>
                   <button type="submit" className={styles.signInButton + ' w-full' + `${isLoading ? ' cursor-not-allowed' : ' '}`}>Register</button>
                 </div>
               </Form>
             )}
           </Formik>
         </div>
+
       </div>
 
     </div>

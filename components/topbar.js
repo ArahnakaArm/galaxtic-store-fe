@@ -92,7 +92,7 @@ export default function topbar() {
                 {({ open }) => (
                   <>
                     <Popover.Button className='outline-0 ' ref={buttonRef}
-                   
+
                     >
                       <div className='absolute -right-3 -top-2 bg-red-500 z-20 rounded-full px-1 py-[2px]'>
                         <p className='mb-0 text-xs text-white font-semibold'>12</p>
@@ -110,13 +110,13 @@ export default function topbar() {
                       leaveFrom="opacity-100 translate-y-0"
                       leaveTo="opacity-0 translate-y-1"
                     >
-                      <Popover.Panel 
-                         
-                           className="absolute right-[-18px] z-10  w-screen max-w-sm mt-1 transform px-4 sm:px-0 ">
+                      <Popover.Panel
 
-                   <div style={{transform : "translate(-50%, -50%) rotate(45deg)"}}  className='bg-white w-[15px] h-[15px] absolute  right-[15px] z-20'>
-                    
-                      </div> 
+                        className="absolute right-[-18px] z-10  w-screen max-w-sm mt-1 transform px-4 sm:px-0 ">
+
+                        <div style={{ transform: "translate(-50%, -50%) rotate(45deg)" }} className='bg-white w-[15px] h-[15px] absolute  right-[15px] z-20'>
+
+                        </div>
 
                         <div className="overflow-hidden rounded shadow-lg ring-1 ring-black ring-opacity-5">
                           <div className="relative grid gap-8 bg-white p-7 lg:grid-cols-1">

@@ -7,10 +7,10 @@ import { useRouter } from 'next/router';
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
   const exceptPath = [
-    '/user/login', 
-    '/user/forgot-password', 
-    '/user/change-password-verify', 
-    '/user/register', 
+    '/user/login',
+    '/user/forgot-password',
+    '/user/change-password-verify',
+    '/user/register',
     '/user/verify-email'
   ]
   const found = exceptPath.find(item =>
@@ -19,13 +19,12 @@ function MyApp({ Component, pageProps }) {
 
   return <>
     {!found && <div className='h-full'>
-      <Topbar></Topbar>
+      {/*  <Topbar></Topbar> */}
       <Component {...pageProps} />
-      <Footer></Footer>
- 
+      {/*   <Footer></Footer> */}
+
     </div>}
     {found && <div className='h-screen'>
-
       <Component {...pageProps} />
     </div>}
 
@@ -33,4 +32,5 @@ function MyApp({ Component, pageProps }) {
   </>
 }
 
+/* export default wrapper.withRedux(MyApp); */
 export default wrapper.withRedux(MyApp);

@@ -6,10 +6,12 @@ import apiService from '../../services/apiService'
 import AlertBar from '../alertbar/login/alerbar'
 import { RegisterSchema } from '../../services/validate/loginForm'
 import Link from 'next/link'
+import { useRouter } from "next/router";
 
 export default function loginForm() {
   const [messageBar, setMessageBar] = useState(null)
-  const [isLoading , setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const Router = useRouter();
 
   const login = async (value) => {
     setIsLoading(true)
@@ -19,21 +21,27 @@ export default function loginForm() {
     }
     const res = await apiService('POST', 'login', null, null, loginBody)
     if (!res || !res.resultCode || res.resultCode == '50000') {
+      setIsLoading(false)
       setMessageBar({ data: 'Error,Please try again.', type: 'error' })
     }
     if (res.resultCode == '40401') {
+      setIsLoading(false)
       setMessageBar({ data: 'User not found.', type: 'error' })
     }
     if (res.resultCode == '40101') {
+      setIsLoading(false)
       setMessageBar({ data: 'Wrong Password.', type: 'error' })
     }
     if (res.resultCode == '40102') {
+      setIsLoading(false)
       setMessageBar({ data: 'Email is not verified.', type: 'warning' })
     }
     if (res.resultCode == '20000') {
-      
+      setIsLoading(false)
+      console.log(res.resultData.token)
+      localStorage.setItem("accessToken", res.resultData.token);
+      Router.replace("/user/profile");
     }
-    setIsLoading(false)
   }
 
   return (
@@ -49,9 +57,13 @@ export default function loginForm() {
         <div>
           <Formik
             initialValues={{
-              email: 'testadmin@gmail.com',
-              password: '12345689',
+              email: '',
+              password: '',
             }}
+            /*   initialValues={{
+                email: 'teetawatriya@gmail.com',
+                password: 'aA0899752124-',
+              }} */
             validationSchema={RegisterSchema}
             onSubmit={async (values) => {
               // same shape as initial values
@@ -98,10 +110,10 @@ export default function loginForm() {
                   </div>
                 </div>
                 <div className='mt-4 flex justify-center'>
-                <Link href="/user/forgot-password">
-                  <a className={styles.forgotPassText}>
-                    Forgot Password ?
-                  </a>
+                  <Link href="/user/forgot-password">
+                    <a className={styles.forgotPassText}>
+                      Forgot Password ?
+                    </a>
                   </Link>
                 </div>
                 <div className='mt-4 flex justify-center'>
