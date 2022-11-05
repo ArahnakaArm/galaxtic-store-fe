@@ -1,6 +1,6 @@
-import React, { useEffect , useState } from 'react'
-import { useRouter } from 'next/router'
-import apiService from '../../services/apiService'
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import apiService from "../../services/apiService";
 
 /* export default () => {
     const router = useRouter();
@@ -30,38 +30,34 @@ import apiService from '../../services/apiService'
     )
 } */
 
-
 export async function getStaticPaths() {
-    const posts = await apiService('TEST GET', 'https://jsonplaceholder.typicode.com/posts')
-  
-    const paths = posts.map((post) => ({
-      params: { id: post.id.toString() }
-    }))
-  
-    // fallback: false means pages that don’t have the
-    // correct id will 404.
-    return { paths, fallback: false }
-  }
-  
-  // params will contain the id for each generated page.
-  export async function getStaticProps({ params }) {
-    const post =  await apiService('TEST GET', `https://jsonplaceholder.typicode.com/posts?id=${params.id}`)
-    return {
-      props: {
-        post: post[0]
-      }
-    }
-  }
+  const posts = await apiService("TEST GET", "https://jsonplaceholder.typicode.com/users");
 
-  export default ({post}) => {
-  
-    
+  const paths = posts.map((post) => ({
+    params: { id: post.id.toString() },
+  }));
 
-    return (
-        <>
-            <h1>Post detail</h1>
-            {post &&<p>Post id  : {post.id}</p>}
-            {post &&<p>Post title  : {post.title}</p>}
-        </>
-    )
-} 
+  // fallback: false means pages that don’t have the
+  // correct id will 404.
+  return { paths, fallback: false };
+}
+
+// params will contain the id for each generated page.
+export async function getStaticProps({ params }) {
+  const post = await apiService("TEST GET", `https://jsonplaceholder.typicode.com/users?id=${params.id}`);
+  return {
+    props: {
+      post: post[0],
+    },
+  };
+}
+
+export default ({ post }) => {
+  return (
+    <>
+      <h1>Post detail</h1>
+      {post && <p>Post id : {post.id}</p>}
+      {post && <p>Post title : {post.title}</p>}
+    </>
+  );
+};
